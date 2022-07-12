@@ -1,10 +1,13 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.selector.ByText;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 
@@ -26,30 +29,72 @@ public class student_registration_form {
         executeJavaScript("$('#fixedban').remove()");
 
         // Тестирование Student Registration Form
+
+
+        //Имя и Фамилия
         $("#firstName").setValue("Timur");
         $("#lastName").setValue("Shakmaev");
 
+
+        //Емайл
         $("#userEmail").setValue("shaq@mail.ru");
 
-        $(new ByText("Male")).click();
+
+        //Выбор пола
+        $(byText("Male")).click();
+
 
         //Введение номера телефона
-
         $("#userNumber").setValue("9276043709");
 
-        //Выбор даты рождения( выпадающий список )
 
+        //Выбор даты рождения( выпадающий список )
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption("April");
         $(".react-datepicker__year-select").selectOption("1998");
-        $(new ByText("9")).click();
+        $(byText("9")).click();
 
 
+        //Выбор предмета
+        $(".subjects-auto-complete__input").click();
+        $("#subjectsInput").sendKeys("C");
+        $(byText("Computer Science")).click();
 
 
+        //Хобби
+        $(byText("Sports")).click();
 
 
+        //Загрузка фото
+        $("#uploadPicture").uploadFromClasspath("1.png");
 
 
+        //Адрес проживания
+        $("#currentAddress").setValue("Chernogoria");
+        $("#state").click();
+        $(byText("NCR")).click();
+        $("#city").click();
+        $(byText("Delhi")).click();
 
+
+        //Отобразить
+        $("#submit").click();
+
+
+        //Проверка
+        $(".modal-content").shouldHave(
+                text("Timur"),
+                text("Shakmaev"),
+                text("shaq@mail.ru"),
+                text("9276043709"),
+                text("Male"),
+                text("09 Apl 1998"),
+                text("Computer science"),
+                text("Sport"),
+                text("1.png"),
+                text("Chernogoria"),
+                text("NCR"),
+                text("Delhi")
+
+        );
     }}
