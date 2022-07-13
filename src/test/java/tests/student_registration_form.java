@@ -66,7 +66,7 @@ public class student_registration_form {
 
 
         //Загрузка фото
-        $("#uploadPicture").uploadFromClasspath("1.png");
+        $("#uploadPicture").uploadFile (new File("/Users/Maratovich/Desktop/test.png"));
 
 
         //Адрес проживания
@@ -83,15 +83,14 @@ public class student_registration_form {
 
         //Проверка
         $(".modal-content").shouldHave(
-                text("Timur"),
-                text("Shakmaev"),
+                text("Timur Shakmaev"),
                 text("shaq@mail.ru"),
                 text("9276043709"),
                 text("Male"),
-                text("09 Apl 1998"),
+                text("09 April,1998"),
                 text("Computer science"),
                 text("Sport"),
-                text("1.png"),
+                text("test.png"),
                 text("Chernogoria"),
                 text("NCR"),
                 text("Delhi")
